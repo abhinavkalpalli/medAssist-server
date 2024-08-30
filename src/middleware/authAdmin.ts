@@ -2,22 +2,23 @@ import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import Admins,{Admin} from '../models/adminModel'
 import dotenv from 'dotenv'
-import { join } from 'path';
 import { Patient } from "../models/patientModel";
+import { Doctor } from "../models/doctorModel";
 dotenv.config();
-// Define interfaces for decoded token and user
 interface DecodedToken {
   userId?: string;
   email?: string;
 }
 
+
 declare global {
   namespace Express {
     interface Request {
-      user?: Patient;
+      user?: Patient | Doctor | Admin;
     }
   }
 }
+
 
 // @desc    To get user from decoded token
 // @route   < Middleware - Helper >
@@ -65,7 +66,8 @@ const protectadmin = async (req: Request, res: Response, next: NextFunction) => 
       verifyUser(decoded)
         .then((user) => {
           if (user) {
-            next()
+            req.user = user;
+           next();
           } else {
             // User not found
             res.status(404).json({
@@ -76,8 +78,7 @@ const protectadmin = async (req: Request, res: Response, next: NextFunction) => 
           }
         })
         .catch((error) => {
-          // Handle database errors
-          console.log(error);
+          
           res.status(500).json({
             message: "Internal Server Error",
             status: 500,

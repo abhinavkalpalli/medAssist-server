@@ -4,6 +4,8 @@ import Doctors,{ Doctor } from "../models/doctorModel";
 import dotenv from 'dotenv'
 import { join } from 'path';
 import { Patient } from "../models/patientModel";
+import { Admin } from "../models/adminModel";
+
 dotenv.config();
 // Define interfaces for decoded token and user
 interface DecodedToken {
@@ -14,10 +16,11 @@ interface DecodedToken {
 declare global {
   namespace Express {
     interface Request {
-      user?: Patient;
+      user?: Patient | Doctor | Admin;
     }
   }
 }
+
 
 // @desc    To get user from decoded token
 // @route   < Middleware - Helper >
@@ -96,7 +99,6 @@ const protectdoctor = async (req: Request, res: Response, next: NextFunction) =>
           });
         });
     } catch (e) {
-      console.log(e);
       // Token verification failed
       res.status(401).json({
         message: "User not authorized",

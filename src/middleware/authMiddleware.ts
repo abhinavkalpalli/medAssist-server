@@ -17,18 +17,17 @@ type User = Doctor | Admin | Patient;
 declare global {
   namespace Express {
     interface Request {
-      user?: Patient;
+      user?: Patient | Doctor | Admin;
     }
   }
 }
 
+
 const verifyUser = (decodedToken: DecodedToken): Promise<Patient | null> => {
-  console.log('Entering verifyUser:', decodedToken);
   return new Promise((resolve, reject) => {
     Patients.findOne({ _id: decodedToken?.userId })
       .select("-password")
       .then((user) => {
-        console.log('User found:', user);
         resolve(user);
       })
       .catch((err) => reject(err));
@@ -36,7 +35,6 @@ const verifyUser = (decodedToken: DecodedToken): Promise<Patient | null> => {
 };
 
 const renewAccessToken = (userId: string): Promise<string> => {
-  console.log('Entering renewAccessToken');
   return new Promise((resolve, reject) => {
     jwt.sign(
       { userId: userId },
@@ -58,7 +56,6 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const accessToken = req.headers.authorization;
       const decoded = jwt.verify(accessToken, process.env.JWT_KEY_SECRET as string) as DecodedToken;
-      console.log('Decoded token:', decoded);
 
       verifyUser(decoded)
         .then((user) => {
@@ -111,8 +108,6 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
 export default protect;
 
 export const refreshAccessToken = (req: Request, res: Response) => {
-  console.log('Entering refreshAccessToken', req.headers.authorization);
-
   if (req.headers.authorization) {
     const refreshToken = req.headers.authorization;
 
@@ -121,8 +116,6 @@ export const refreshAccessToken = (req: Request, res: Response) => {
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET as string
       ) as DecodedToken;
-
-      console.log('Decoded refresh token:', decodedRefreshToken);
 
       verifyUser(decodedRefreshToken)
         .then(async (user) => {

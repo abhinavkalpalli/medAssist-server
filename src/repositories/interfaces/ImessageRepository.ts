@@ -7,5 +7,5 @@ export interface ImessageRepository{
     conversationPatients(id:string):Promise<Doctor[]|null>
     conversationDoctors(id:string):Promise<Patient[]|null>
     getMessages(id:string,senderId:string):Promise<IConversation|null>
-    sendMessage(id:string,senderId:string,message:string,messageType: 'text' | 'image' | 'voice'):Promise<IMessage|null>
+    sendMessage(id:string,senderId:string,message:string,messageType: string):Promise<IMessage|null>
 }

@@ -11,7 +11,7 @@ router.post('/patient/refresh-token',refreshAccessToken)
 router.get('/patient',protect,AuthController.patientAuth.bind(AuthController))
 router.post('/admin/refresh-token',refreshAccessTokenadmin)
 router.get('/admin',protectadmin,AuthController.adminAuth.bind(AuthController))
-router.post('doctor/refresh-token',refreshAccessTokenDoctor)
+router.post('/doctor/refresh-token',refreshAccessTokenDoctor)
 router.get('/doctor',protectdoctor,AuthController.doctorAuth.bind(AuthController))
 router.get('/resendotp',VerificationController.otpresend.bind(VerificationController))
 

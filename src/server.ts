@@ -11,6 +11,7 @@ import { adminRoutes } from './routes/adminRoutes';
 import { authRoutes } from './routes/authRouter';
 import { messageRoutes } from './routes/messageRoutes';
 import path from 'path';
+import { log } from 'console';
 
 
 dotenv.config();
