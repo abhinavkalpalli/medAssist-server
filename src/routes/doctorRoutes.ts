@@ -55,7 +55,6 @@ router.get(
 );
 router.get(
   "/appointments",
-  protectdoctor,
   DoctorController.appointments.bind(DoctorController)
 );
 router.get(

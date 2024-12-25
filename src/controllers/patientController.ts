@@ -127,10 +127,7 @@ export default class patientController implements IpatientController {
       return res
         .status(200)
         .json({
-          message: "Profile Updated",
-          name: data?.name,
-          email: data?.email,
-          photo: data?.photo,
+          message: "Profile Updated"
         });
     } catch (err) {
       return res.status(500).json({ message: "Internal Error" });

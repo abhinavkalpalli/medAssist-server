@@ -53,7 +53,6 @@ router.get(
 );
 router.get(
   "/cancelAppointment/:id",
-  protect,
   PatientController.cancelAppointment.bind(PatientController)
 );
 router.post(

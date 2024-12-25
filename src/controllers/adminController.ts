@@ -105,14 +105,12 @@ export default class adminController implements IadminController {
         date as string
       );
       if (data) {
-        return res
-          .status(200)
-          .json({
-            message: "Bookings",
-            bookings: data.bookings,
-            totalPages: data.totalPages,
-            totalBookings: data.totalBookings,
-          });
+        return res.status(200).json({
+          message: "Bookings",
+          bookings: data.bookings,
+          totalPages: data.totalPages,
+          totalBookings: data.totalBookings,
+        });
       }
     } catch (err) {
       return res.status(500).json({ message: "Internal Error" });
@@ -145,7 +143,7 @@ export default class adminController implements IadminController {
       const { name } = req.body;
       const data = await this._adminService.addExpertise(name);
       if (data) {
-        return res.status(200).json({ message: "New Expertise Added" });
+        return res.status(200).json({ message: "New Expertise Added", data });
       } else {
         return res.status(500).json({ message: "Internal Server Error" });
       }

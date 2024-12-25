@@ -16,6 +16,7 @@ export default class messageController implements ImessageController {
     try {
       const { message } = req.body;
       const { id, senderId } = req.params;
+      
       const files = req.files as { [fieldname: string]: Express.Multer.File[] };
 
       let messageType: "text" | "image" | "voice" = "text";

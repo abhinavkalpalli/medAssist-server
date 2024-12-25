@@ -48,67 +48,63 @@ export default class doctorController implements IdoctorController {
             email: existingUser?.email,
           });
           if (!existingUser?.is_Blocked) {
-            return res
-              .status(201)
-              .json({
-                message: "GoolgeAuth",
-                name: existingUser?.name,
-                email: existingUser?.email,
-                address: existingUser?.address,
-                phone: existingUser?.phone,
-                gender: existingUser?.gender,
-                state: existingUser?.state,
-                pincode: existingUser?.pincode,
-                country: existingUser?.country,
-                photo: existingUser?.photo,
-                is_Verified: existingUser?.is_Verified,
-                expertise: existingUser?.expertise,
-                dateOfBirth: existingUser?.dateOfBirth,
-                currentWorkingHospital: existingUser?.currentWorkingHospital,
-                workingDays: existingUser?.workingDays,
-                experienceYears: existingUser?.experienceYears,
-                workingHospitalContact: existingUser?.workingHospitalContact,
-                documents: existingUser?.documents,
-                _id: existingUser?._id,
-                is_Blocked: existingUser?.is_Blocked,
-                Wallet: existingUser?.Wallet,
-                WalletHistory: existingUser?.WalletHistory,
-                tokens,
-                education: existingUser?.education,
-              });
+            return res.status(201).json({
+              message: "GoolgeAuth",
+              name: existingUser?.name,
+              email: existingUser?.email,
+              address: existingUser?.address,
+              phone: existingUser?.phone,
+              gender: existingUser?.gender,
+              state: existingUser?.state,
+              pincode: existingUser?.pincode,
+              country: existingUser?.country,
+              photo: existingUser?.photo,
+              is_Verified: existingUser?.is_Verified,
+              expertise: existingUser?.expertise,
+              dateOfBirth: existingUser?.dateOfBirth,
+              currentWorkingHospital: existingUser?.currentWorkingHospital,
+              workingDays: existingUser?.workingDays,
+              experienceYears: existingUser?.experienceYears,
+              workingHospitalContact: existingUser?.workingHospitalContact,
+              documents: existingUser?.documents,
+              _id: existingUser?._id,
+              is_Blocked: existingUser?.is_Blocked,
+              Wallet: existingUser?.Wallet,
+              WalletHistory: existingUser?.WalletHistory,
+              tokens,
+              education: existingUser?.education,
+            });
           } else {
             return res.status(403).json({ message: "User is blocked" });
           }
         } else {
           if (!userData.is_Blocked) {
-            return res
-              .status(201)
-              .json({
-                message: "GoolgeAuth",
-                name: userData?.name,
-                email: userData?.email,
-                address: userData?.address,
-                phone: userData?.phone,
-                gender: userData?.gender,
-                state: userData?.state,
-                pincode: userData?.pincode,
-                country: userData?.country,
-                photo: userData?.photo,
-                is_Verified: userData?.is_Verified,
-                expertise: userData?.expertise,
-                dateOfBirth: userData?.dateOfBirth,
-                currentWorkingHospital: userData?.currentWorkingHospital,
-                workingDays: userData?.workingDays,
-                experienceYears: userData?.experienceYears,
-                workingHospitalContact: userData?.workingHospitalContact,
-                documents: userData?.documents,
-                _id: userData?._id,
-                is_Blocked: userData?.is_Blocked,
-                Wallet: userData?.Wallet,
-                WalletHistory: userData.WalletHistory,
-                education: userData.education,
-                tokens,
-              });
+            return res.status(201).json({
+              message: "GoolgeAuth",
+              name: userData?.name,
+              email: userData?.email,
+              address: userData?.address,
+              phone: userData?.phone,
+              gender: userData?.gender,
+              state: userData?.state,
+              pincode: userData?.pincode,
+              country: userData?.country,
+              photo: userData?.photo,
+              is_Verified: userData?.is_Verified,
+              expertise: userData?.expertise,
+              dateOfBirth: userData?.dateOfBirth,
+              currentWorkingHospital: userData?.currentWorkingHospital,
+              workingDays: userData?.workingDays,
+              experienceYears: userData?.experienceYears,
+              workingHospitalContact: userData?.workingHospitalContact,
+              documents: userData?.documents,
+              _id: userData?._id,
+              is_Blocked: userData?.is_Blocked,
+              Wallet: userData?.Wallet,
+              WalletHistory: userData.WalletHistory,
+              education: userData.education,
+              tokens,
+            });
           } else {
             res.status(403).json({ message: "User is blocked" });
           }
@@ -179,26 +175,24 @@ export default class doctorController implements IdoctorController {
         expertise,
         education,
       });
-      return res
-        .status(200)
-        .json({
-          message: "Profile Updated",
-          name: data?.name,
-          email: data?.email,
-          photo: data?.photo,
-          currentWorkingHospital: data?.currentWorkingHospital,
-          dateOfBirth: data?.dateOfBirth,
-          experienceYears: data?.experienceYears,
-          gender: data?.gender,
-          phone: data?.phone,
-          workingHospitalContact: data?.workingHospitalContact,
-          expertise: data?.expertise,
-          documents: data?.documents,
-          _id: data?._id,
-          Wallet: data?.Wallet,
-          WalletHistory: data?.WalletHistory,
-          education: data?.education,
-        });
+      return res.status(200).json({
+        message: "Profile Updated",
+        name: data?.name,
+        email: data?.email,
+        photo: data?.photo,
+        currentWorkingHospital: data?.currentWorkingHospital,
+        dateOfBirth: data?.dateOfBirth,
+        experienceYears: data?.experienceYears,
+        gender: data?.gender,
+        phone: data?.phone,
+        workingHospitalContact: data?.workingHospitalContact,
+        expertise: data?.expertise,
+        documents: data?.documents,
+        _id: data?._id,
+        Wallet: data?.Wallet,
+        WalletHistory: data?.WalletHistory,
+        education: data?.education,
+      });
     } catch (err) {
       return res.status(500).json({ message: "Internal Error" });
     }
